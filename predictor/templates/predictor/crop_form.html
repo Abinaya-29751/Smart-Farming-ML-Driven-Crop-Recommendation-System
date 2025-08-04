@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crop Recommendation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('/static/images/bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .crop-container {
+            background: rgba(0, 0, 0, 0.7); /* Transparent dark card */
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            width: 100%;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: white;
+        }
+        form {
+            text-align: left;
+        }
+        input, select {
+            width: 95%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: none;
+            outline: none;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        a {
+            color: #ffc107;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #00ff88;
+        }
+    </style>
+</head>
+<body>
+    <div class="crop-container">
+        <h2>Crop Recommendation Form</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Predict Crop</button>
+        </form>
+
+        {% if result %}
+            <p class="result"><strong>Recommended Crop:</strong> {{ result }}</p>
+        {% endif %}
+
+        <p style="margin-top: 15px;"><a href="{% url 'logout' %}">Logout</a></p>
+    </div>
+</body>
+</html>
